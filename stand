@@ -1,0 +1,19 @@
+sepolia:
+EntryPoint deployed to: 0xC45b9ADaaD34cB8817C3644084B44252beeB4b3c
+Paymaster deployed to: 0xa8758E46bc5F6b0BAd661fbbfA03f9494abABE17
+smartWallet deployed to: 0xbdFE617AdF2Ee4B18Cb89d34938956B47838E974
+
+goerli:
+Token deployed to: 0x2458A3DECED01f614375539EBF2b77D44aeDA324
+GasTank deployed to: 0xC45b9ADaaD34cB8817C3644084B44252beeB4b3c
+
+tx:
+{
+      sender: 0xbdFE617AdF2Ee4B18Cb89d34938956B47838E974,
+      nonce: 0,
+      to: 0xb16F35c0Ae2912430DAc15764477E179D9B9EbEa,
+      callData: 0xd0e30db0,
+      value: 10000000000000000,
+      paymasterAndData: 0xa8758E46bc5F6b0BAd661fbbfA03f9494abABE177cce229cf88d96b2568bbaa74479ca1d59b802debc0acff90c239a040427e49532b5b2a9ef9bfa169b73e4cec4f73d4e56ef9d02f838b390c0e76fa4e75f9b031b,
+      signature: 0x752e7b93ee75908ae1e3bfb5046b15e160bf4fde8a92f4105db0ea7db76c28a331404e8a60155fe7999ba547b82329ef78f8f9718110af1b3a9524a467941e611b ,
+    }
