@@ -37,7 +37,7 @@ describe("Test", function () {
     await deployer.sendTransaction({
           to: paymaster.address,
           value: ethers.utils.parseEther("1")
-      });
+    });
 
     const Wallet = await ethers.getContractFactory("SmartWallet");
     smartWallet = await Wallet.deploy(entryPoint.address, wallet.address);
@@ -73,15 +73,15 @@ describe("Test", function () {
       paymasterAndData: paymaster.address,
       signature: "0x",
     }
+
     await token.approve(gasTank.address, ethers.utils.parseEther("10"));
-    let gasTankTx = await gasTank.payForUserOp(userOperation, hardhatChainID, ethers.utils.parseEther("10"));
+    let gasTankTx = await gasTank.payForUserOp(userOperation, hardhatChainID, ethers.utils.parseEther("10"), paymaster.address);
 
     const hashPaymaster = await paymaster.getHash(userOperation);
 
     let signaturePaymaster = signerPaymaster.signDigest(hashPaymaster);
     let signatureFlatPaymaster = ethers.utils.joinSignature(signaturePaymaster);
     let paymasterData = paymaster.address + signatureFlatPaymaster.slice(2);
-
     const userOperationPaymaster = {
       sender: smartWallet.address,
       nonce: 0,

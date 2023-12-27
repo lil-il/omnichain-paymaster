@@ -1,6 +1,6 @@
 const {ethers} = require("hardhat");
-
-
+require("dotenv").config();
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
 function timeout(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -11,17 +11,17 @@ async function main() {
     let entryPoint = await EntryPoint.attach("0xC45b9ADaaD34cB8817C3644084B44252beeB4b3c")
     const userOperationPaymaster = {
         sender: "0xbdFE617AdF2Ee4B18Cb89d34938956B47838E974",
-        nonce: 0,
+        nonce: 1,
         to: "0xb16F35c0Ae2912430DAc15764477E179D9B9EbEa",
         callData: "0xd0e30db0",
-        value: ethers.utils.parseEther("0.01"),
-        paymasterAndData: "0xa8758E46bc5F6b0BAd661fbbfA03f9494abABE177cce229cf88d96b2568bbaa74479ca1d59b802debc0acff90c239a040427e49532b5b2a9ef9bfa169b73e4cec4f73d4e56ef9d02f838b390c0e76fa4e75f9b031b",
+        value: ethers.utils.parseEther("0.001"),
+        paymasterAndData: "0xa8758E46bc5F6b0BAd661fbbfA03f9494abABE173aece8824b0b5cd25f9c3240504cda81a768274d6dc4c28e41d78f789e23cfc46e83901ae543c2e744f8756465a326564bfbdf0bf361ca3da2c2c8526cd5936a1c",
         signature: "0x",
     }
 
     const hash = await entryPoint.getRequestId(userOperationPaymaster);
     let privateKey =
-        "";
+        PRIVATE_KEY;
     wallet = new ethers.Wallet(privateKey);
     signer = new ethers.utils.SigningKey(privateKey);
 

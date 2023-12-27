@@ -12,12 +12,12 @@ contract GasTank {
         token = _token;
     }
 
-    function payForUserOp(UserOperation calldata userOp, uint256 chainID, uint256 amount) external {
+    function payForUserOp(UserOperation calldata userOp, uint256 chainID, uint256 amount, address paymaster) external {
         token.transferFrom(msg.sender, address(this), amount);
-        emit PayedForUserOp(getHash(userOp, chainID), amount);
+        emit PayedForUserOp(getHash(userOp, chainID, paymaster), amount);
     }
 
-    function getHash(UserOperation calldata userOp, uint256 chainID) public view returns (bytes32) {
+    function getHash(UserOperation calldata userOp, uint256 chainID, address paymaster) public view returns (bytes32) {
         return
         keccak256(
             abi.encode(
@@ -26,7 +26,7 @@ contract GasTank {
                 userOp.to,
                 keccak256(userOp.callData),
                 chainID,
-                userOp.paymasterAndData[:20]
+                paymaster
             )
         );
     }

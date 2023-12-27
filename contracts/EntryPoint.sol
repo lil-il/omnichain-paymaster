@@ -24,16 +24,16 @@ contract EntryPoint is IEntryPoint {
 
     function handleOp(UserOperation calldata userOp) public {
         _validatePrepayment(userOp);
-        address paymaster = address(bytes20(userOp.paymasterAndData[: 20]));
-        IPaymaster(paymaster).returnGas(txCost, msg.sender);
-        _executeUserOp(userOp);
+//        address paymaster = address(bytes20(userOp.paymasterAndData[: 20]));
+//        IPaymaster(paymaster).returnGas(txCost, msg.sender);
+//        _executeUserOp(userOp);
     }
 
 
     function _validatePrepayment(UserOperation calldata userOp) private {
-        address sender = userOp.sender;
-        bytes32 requestId = getRequestId(userOp);
-        IWallet(sender).validateUserOp(userOp, requestId);
+//        address sender = userOp.sender;
+//        bytes32 requestId = getRequestId(userOp);
+//        IWallet(sender).validateUserOp(userOp, requestId);
 
         address paymaster = address(bytes20(userOp.paymasterAndData[: 20]));
         require(address(paymaster).balance >= txCost, "Insufficient paymaster balance");
@@ -41,6 +41,6 @@ contract EntryPoint is IEntryPoint {
     }
 
     function getRequestId(UserOperation calldata userOp) public view returns (bytes32) {
-        return keccak256(abi.encode(userOp.sender, userOp.nonce, userOp.to, userOp.callData, userOp.value, userOp.paymasterAndData, address(this), block.chainid));
+        return keccak256(abi.encode(userOp.sender, userOp.nonce, userOp.to, userOp.callData, userOp.value, address(this), block.chainid));
     }
 }

@@ -20,7 +20,6 @@ contract VerifyingPaymaster  {
             abi.encode(
                 userOp.sender,
                 userOp.nonce,
-                userOp.to,
                 keccak256(userOp.callData),
                 block.chainid,
                 address(this)
